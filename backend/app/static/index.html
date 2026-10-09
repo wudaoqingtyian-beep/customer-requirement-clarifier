@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>客户技术需求澄清工具</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>客户技术需求澄清工具</h1>
+    <p class="sub">售前阶段：记录客户技术需求 → 检查信息完整性 → 生成待澄清问题</p>
+  </header>
+
+  <main>
+    <!-- 项目列表 -->
+    <section id="view-projects">
+      <h2>项目列表</h2>
+      <form id="project-form" class="card">
+        <h3>新建售前项目</h3>
+        <label>项目名称<input id="p-name" required placeholder="例：某集团 ERP 集成项目" /></label>
+        <label>客户名称<input id="p-client" placeholder="例：某某制造集团" /></label>
+        <label>项目描述<textarea id="p-desc" rows="2" placeholder="简要背景"></textarea></label>
+        <button type="submit">创建项目</button>
+      </form>
+      <ul id="project-list" class="list"></ul>
+    </section>
+
+    <!-- 项目详情 -->
+    <section id="view-project" class="hidden">
+      <button class="link-btn" id="back-projects">← 返回项目列表</button>
+      <div class="card">
+        <h3 id="pd-name"></h3>
+        <p id="pd-meta" class="muted"></p>
+        <p id="pd-desc"></p>
+      </div>
+
+      <h2>客户技术需求</h2>
+      <form id="requirement-form" class="card">
+        <h3>新建技术需求</h3>
+        <label>需求名称<input id="r-name" required placeholder="例：ERP 系统对接" /></label>
+        <label>需求类型<select id="r-type"></select></label>
+        <label>客户原始描述<textarea id="r-original" rows="3" placeholder="例：希望和现有 ERP 对接。"></textarea></label>
+        <button type="submit">创建需求</button>
+      </form>
+      <ul id="requirement-list" class="list"></ul>
+    </section>
+
+    <!-- 需求详情 -->
+    <section id="view-requirement" class="hidden">
+      <button class="link-btn" id="back-project">← 返回项目</button>
+      <div class="card">
+        <h3 id="rd-name"></h3>
+        <p class="muted">需求类型：<span id="rd-type"></span> · 状态：<span id="rd-status"></span></p>
+        <p><strong>客户原始需求</strong></p>
+        <p id="rd-original" class="muted"></p>
+      </div>
+
+      <div class="card">
+        <h3>结构化技术信息</h3>
+        <p class="muted">填写客户确认的信息后点击「保存并检查」。结构化字段是澄清项的唯一数据源。</p>
+        <div id="rd-fields"></div>
+        <button id="save-check">保存并检查</button>
+      </div>
+
+      <div class="card">
+        <h3>完整性检查</h3>
+        <div id="rd-result"></div>
+        <div class="actions confirm-area">
+          <button id="confirm-requirement" disabled>确认需求</button>
+          <span class="muted" id="confirm-hint"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>澄清项</h3>
+        <div id="rd-clarifications"></div>
+      </div>
+
+      <div class="card" id="rd-summary-card">
+        <h3>需求确认摘要</h3>
+        <div id="rd-summary"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
